@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Corrección para centrar texto con ícono */
+    .menu-icon-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Encabezado -->
+    <header class="header">
+      <h2>Hola, LEGARTY E.I.R.L.</h2>
+      <p class="subheader">Bienvenido a tu panel de gestión</p>
+    </header>
+
+    <!-- Menú principal -->
+    <main class="menu-grid">
+      <a href="pedido.html" class="menu-item">
+        <div class="menu-icon-text">
+          <img src="https://img.icons8.com/ios-filled/50/shopping-cart.png" alt="Pedido">
+          <span>Pedir Cajas</span>
+        </div>
+      </a>
+
+      <a href="historial.html" class="menu-item">
+        <div class="menu-icon-text">
+          <img src="https://img.icons8.com/ios-filled/50/clock--v1.png" alt="Historial">
+          <span>Historial</span>
+        </div>
+      </a>
+
+      <a href="trazabilidad.html" class="menu-item">
+        <div class="menu-icon-text">
+          <img src="https://img.icons8.com/ios-filled/50/qr-code.png" alt="Trazabilidad">
+          <span>Trazabilidad</span>
+        </div>
+      </a>
+
+      <a href="impacto.html" class="menu-item">
+        <div class="menu-icon-text">
+          <img src="https://img.icons8.com/ios-filled/50/leaf.png" alt="Impacto">
+          <span>Impacto</span>
+        </div>
+      </a>
+
+      <a href="perfil.html" class="menu-item">
+        <div class="menu-icon-text">
+          <img src="https://img.icons8.com/ios-filled/50/user.png" alt="Perfil">
+          <span>Mi Perfil</span>
+        </div>
+      </a>
+
+      <a href="reportes.html" class="menu-item">
+        <div class="menu-icon-text">
+          <img src="https://img.icons8.com/ios-filled/50/combo-chart--v1.png" alt="Reportes">
+          <span>Reportes</span>
+        </div>
+      </a>
+      <div></div>
+    </main>
+    
+    <!-- Botón con modal personalizado -->
+    <footer class="footer-dashboard">
+      <button onclick="abrirModalCerrarSesion()" class="btn-secondary logout-btn">Cerrar sesión</button>
+    </footer>
+
+    <!-- Modal personalizado de cierre de sesión -->
+    <div class="modal-overlay" id="modalLogout" style="display: none;">
+      <div class="modal-content">
+        <h3>¿Deseas cerrar sesión?</h3>
+        <p>Perderás el acceso a tu cuenta hasta volver a iniciar sesión.</p>
+        <div class="modal-actions">
+          <button class="btn-primary" onclick="cerrarSesion()">Sí, cerrar sesión</button>
+          <button class="btn-outline" onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

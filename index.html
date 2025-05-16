@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <div class="login-screen">
+      <div class="logo-container">
+        <img src="#" alt="Logo Poshiniri" class="logo" onerror="this.style.display='none'" />
+        <h1>Poshiniri Hub</h1>
+        <p class="subtitle">Accede a tu cuenta corporativa</p>
+      </div>
+
+      <form class="login-form" onsubmit="event.preventDefault(); loginUser();">
+        <input type="text" id="username" placeholder="Usuario o correo" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button type="submit" class="btn-primary">Ingresar</button>
+      </form>
+
+      <div class="login-footer">
+        <p><a href="recuperar.html" class="link-recuperar">¿Olvidaste tu contraseña?</a></p>
+        <p><small>Versión 1.0 - Beta pública</small></p>
+      </div>
+    </div>
+
+    <!-- Loader animado oculto -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

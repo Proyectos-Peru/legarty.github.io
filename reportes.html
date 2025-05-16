@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Reportes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Encabezado -->
+    <header class="header">
+      <h2>Reportes</h2>
+      <p class="subheader">Análisis de tus pedidos y resultados</p>
+    </header>
+
+    <!-- Panel de datos -->
+    <main class="reports-section">
+
+      <div class="report-card">
+        <h3>📦 Total de pedidos</h3>
+        <p><strong>12</strong></p>
+        <small>En los últimos 6 meses</small>
+      </div>
+
+      <div class="report-card">
+        <h3>📉 Cajas adquiridas</h3>
+        <p><strong>112 cajas</strong></p>
+        <small>Promedio mensual: 18</small>
+      </div>
+
+      <div class="report-card">
+        <h3>🌿 Plástico evitado</h3>
+        <p><strong>24.6 kg</strong></p>
+        <small>Gracias a empaques compostables</small>
+      </div>
+
+      <div class="report-card">
+        <h3>📈 Ahorro en grasas trans</h3>
+        <p><strong>100%</strong></p>
+        <small>Comparado con snacks tradicionales</small>
+      </div>
+
+      <button type="button" class="btn-outline" onclick="window.location.href='dashboard.html'">Volver al inicio</button>
+
+    </main>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

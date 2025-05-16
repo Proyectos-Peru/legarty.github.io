@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Perfil</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .profile-box {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-header h2 {
+      font-size: 1.4rem;
+      color: #2e7d32;
+      margin-bottom: 5px;
+    }
+
+    .profile-header p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .profile-item {
+      margin-bottom: 18px;
+    }
+
+    .profile-item h4 {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 4px;
+    }
+
+    .profile-item p {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .profile-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-profile {
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-profile.edit {
+      background-color: #379237;
+      color: white;
+    }
+
+    .btn-profile.logout {
+      background-color: transparent;
+      color: #379237;
+      border: 1px solid #379237;
+    }
+
+    .btn-profile.logout:hover {
+      background-color: #e8f5e9;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: left;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h3 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #2e7d32;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .modal-buttons button {
+      padding: 10px;
+      width: 48%;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      background-color: #379237;
+      color: white;
+      border: none;
+    }
+
+    .cancel-btn {
+      background-color: #eee;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <header class="header">
+      <h2>Mi Perfil</h2>
+      <p class="subheader">Información de la empresa</p>
+    </header>
+
+    <main class="profile-section">
+      <div class="profile-box">
+        <div class="profile-header">
+          <h2 id="nombreEmpresa">Legarty</h2>
+          <p id="rubroEmpresa">Servicios corporativos</p>
+        </div>
+
+        <div class="profile-item">
+          <h4>📍 Dirección:</h4>
+          <p id="direccionEmpresa">Av. Javier Prado Este 1234, San Borja, Lima</p>
+        </div>
+
+        <div class="profile-item">
+          <h4>📞 Contacto:</h4>
+          <p><strong>Responsable:</strong> <span id="responsableEmpresa">Nombre Ejemplo</span></p>
+          <p><strong>Email:</strong> <span id="emailEmpresa">correo.ejemplo@correo.com</span></p>
+          <p><strong>Teléfono:</strong> <span id="telefonoEmpresa">+51 999 123 456</span></p>
+        </div>
+
+        <div class="profile-item">
+          <h4>🧾 RUC:</h4>
+          <p id="rucEmpresa">20567812345</p>
+        </div>
+
+        <div class="profile-actions">
+          <button class="btn-profile edit" onclick="abrirModalEdicion()">Editar información</button>
+          <button type="button" class="btn-outline" onclick="window.location.href='dashboard.html'">Volver al inicio</button>
+          <button class="btn-profile logout" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal de edición -->
+    <div class="modal-overlay" id="modalPerfil">
+      <div class="modal-content">
+        <h3>Editar Perfil</h3>
+        <label>Nombre de empresa</label>
+        <input type="text" id="inputNombre">
+
+        <label>Rubro</label>
+        <input type="text" id="inputRubro">
+
+        <label>Dirección</label>
+        <input type="text" id="inputDireccion">
+
+        <label>Responsable</label>
+        <input type="text" id="inputResponsable">
+
+        <label>Email</label>
+        <input type="email" id="inputEmail">
+
+        <label>Teléfono</label>
+        <input type="text" id="inputTelefono">
+
+        <label>RUC</label>
+        <input type="text" id="inputRUC">
+
+        <div class="modal-buttons">
+          <button class="save-btn" onclick="guardarPerfil()">Guardar</button>
+          <button class="cancel-btn" onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function abrirModalEdicion() {
+      document.getElementById('modalPerfil').style.display = 'flex';
+
+      // Prellenar datos existentes
+      document.getElementById('inputNombre').value = document.getElementById('nombreEmpresa').textContent;
+      document.getElementById('inputRubro').value = document.getElementById('rubroEmpresa').textContent;
+      document.getElementById('inputDireccion').value = document.getElementById('direccionEmpresa').textContent;
+      document.getElementById('inputResponsable').value = document.getElementById('responsableEmpresa').textContent;
+      document.getElementById('inputEmail').value = document.getElementById('emailEmpresa').textContent;
+      document.getElementById('inputTelefono').value = document.getElementById('telefonoEmpresa').textContent;
+      document.getElementById('inputRUC').value = document.getElementById('rucEmpresa').textContent;
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalPerfil').style.display = 'none';
+    }
+
+    function guardarPerfil() {
+      document.getElementById('nombreEmpresa').textContent = document.getElementById('inputNombre').value;
+      document.getElementById('rubroEmpresa').textContent = document.getElementById('inputRubro').value;
+      document.getElementById('direccionEmpresa').textContent = document.getElementById('inputDireccion').value;
+      document.getElementById('responsableEmpresa').textContent = document.getElementById('inputResponsable').value;
+      document.getElementById('emailEmpresa').textContent = document.getElementById('inputEmail').value;
+      document.getElementById('telefonoEmpresa').textContent = document.getElementById('inputTelefono').value;
+      document.getElementById('rucEmpresa').textContent = document.getElementById('inputRUC').value;
+
+      cerrarModal();
+    }
+
+    function cerrarSesion() {
+      if (confirm("¿Deseas cerrar sesión?")) {
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

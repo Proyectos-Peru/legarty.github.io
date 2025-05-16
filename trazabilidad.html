@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Trazabilidad</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .volver-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 0.9rem;
+      color: #379237;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .volver-btn img {
+      width: 16px;
+      margin-left: 6px;
+    }
+
+    @media (max-width: 480px) {
+      .volver-btn {
+        top: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper" style="position: relative;">
+
+    <!-- Botón Volver -->
+    <button class="volver-btn" onclick="window.location.href='dashboard.html'">
+      Volver
+      <img src="https://img.icons8.com/ios-filled/50/000000/forward.png" alt="Flecha" />
+    </button>
+
+    <!-- Encabezado -->
+    <header class="header">
+      <h2>Origen del Producto</h2>
+      <p class="subheader">Conoce de dónde viene tu poshiniri</p>
+    </header>
+
+    <!-- Contenido -->
+    <main class="traceability-section">
+      <div class="qr-container">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://poshiniri.pe/lote/ashaninka-2025" alt="QR Trazabilidad">
+        <p class="qr-caption">Escanea para más información</p>
+      </div>
+
+      <div class="info-trazabilidad">
+        <p><strong>Lote:</strong> Asháninka-2025</p>
+        <p><strong>Región:</strong> Junín, Pichanaqui</p>
+        <p><strong>Recolectado el:</strong> 12 de abril de 2025</p>
+        <p><strong>Familias productoras:</strong> Comunidad Tsomaveni</p>
+        <p><strong>Pago justo:</strong> S/2.50 por kg</p>
+        <p><strong>Certificación:</strong> Buenas Prácticas Agrícolas (BPA)</p>
+      </div>
+
+      <div class="social-impact-box">
+        <p>🌱 Con tu compra, apoyas directamente a <strong>25 familias Asháninka</strong> y fomentas la agricultura sostenible.</p>
+      </div>
+    </main>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

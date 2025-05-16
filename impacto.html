@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Impacto Ambiental</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .impact-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .impact-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .ver-grafico-btn {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #379237;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .ver-grafico-btn:hover {
+      background-color: #2e7d32;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      width: 95%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content canvas {
+      margin: 20px auto;
+    }
+
+    .modal-controls select {
+      margin: 6px 0;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary { background-color: #379237; color: white; }
+    .btn-close { background-color: #ccc; }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <header class="header">
+      <h2>Tu Impacto Ambiental</h2>
+      <p class="subheader">Estos son los resultados de tu compromiso</p>
+    </header>
+
+    <main class="impact-section">
+      <div class="impact-card">
+        <h3>♻️ Plástico evitado</h3>
+        <p><strong>24.6 kg</strong></p>
+        <small>Gracias al uso de empaques compostables</small>
+      </div>
+
+      <div class="impact-card">
+        <h3>🌱 Aceite reducido</h3>
+        <p><strong>60%</strong></p>
+        <small>Comparado con fritura convencional</small>
+      </div>
+
+      <div class="impact-card">
+        <h3>💧 Agua conservada</h3>
+        <p><strong>110 L</strong></p>
+        <small>Evita procesos de lavado intensivo</small>
+      </div>
+
+      <div class="impact-card">
+        <h3>👨‍🌾 Apoyo rural</h3>
+        <p><strong>25 familias</strong></p>
+        <small>Con mejoras de ingreso directo por pedidos</small>
+      </div>
+
+      <button class="ver-grafico-btn" onclick="abrirModalGrafico()">Ver gráfico de impacto</button>
+      <button type="button" class="btn-outline" onclick="window.location.href='dashboard.html'">Volver al inicio</button>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalGrafico">
+      <div class="modal-content">
+        <h3>Gráfico de Impacto</h3>
+
+        <div class="modal-controls">
+          <select id="vista" onchange="actualizarFiltros(); renderizarGrafico();">
+            <option value="dia">Por Día</option>
+            <option value="semana">Por Semana</option>
+            <option value="mes">Por Mes</option>
+            <option value="año">Por Año</option>
+          </select>
+
+          <select id="tipoGraficoSelect" onchange="renderizarGrafico()">
+            <option value="bar">Barras</option>
+            <option value="line">Líneas</option>
+            <option value="pie">Circular</option>
+            <option value="radar">Radar</option>
+          </select>
+
+          <select id="anioSelect" onchange="renderizarGrafico()"></select>
+          <select id="mesSelect" style="display:none;" onchange="renderizarGrafico()"></select>
+          <select id="semanaSelect" style="display:none;" onchange="renderizarGrafico()"></select>
+        </div>
+
+        <canvas id="graficoImpacto" width="300" height="300"></canvas>
+
+        <div class="modal-actions">
+          <button class="btn-close" onclick="cerrarModalGrafico()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let grafico;
+    const años = [2022, 2023, 2024, 2025];
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const semanas = ['Semana 1','Semana 2','Semana 3','Semana 4'];
+
+    const datos = {
+      año: [150, 160, 170, 180],
+      mes: Array(12).fill().map((_, i) => 10 + i * 2),
+      semana: [20, 25, 18, 30],
+      dia: [5, 6, 7, 8, 5, 4, 6]
+    };
+
+    function abrirModalGrafico() {
+      document.getElementById('modalGrafico').style.display = 'flex';
+      cargarSelects();
+      renderizarGrafico();
+    }
+
+    function cerrarModalGrafico() {
+      document.getElementById('modalGrafico').style.display = 'none';
+      if (grafico) grafico.destroy();
+    }
+
+    function cargarSelects() {
+      const anioSelect = document.getElementById('anioSelect');
+      anioSelect.innerHTML = años.map(a => `<option value="${a}">${a}</option>`).join('');
+
+      const mesSelect = document.getElementById('mesSelect');
+      mesSelect.innerHTML = meses.map((m, i) => `<option value="${i}">${m}</option>`).join('');
+
+      const semanaSelect = document.getElementById('semanaSelect');
+      semanaSelect.innerHTML = semanas.map((s, i) => `<option value="${i}">${s}</option>`).join('');
+    }
+
+    function actualizarFiltros() {
+      const vista = document.getElementById('vista').value;
+      document.getElementById('mesSelect').style.display = (vista === 'dia' || vista === 'semana') ? 'block' : 'none';
+      document.getElementById('semanaSelect').style.display = (vista === 'dia') ? 'block' : 'none';
+    }
+
+    function renderizarGrafico() {
+      const vista = document.getElementById('vista').value;
+      const tipo = document.getElementById('tipoGraficoSelect').value;
+      const ctx = document.getElementById('graficoImpacto').getContext('2d');
+
+      if (grafico) grafico.destroy();
+
+      let labels = [];
+      let data = [];
+
+      switch (vista) {
+        case 'dia':
+          labels = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+          data = datos.dia;
+          break;
+        case 'semana':
+          labels = semanas;
+          data = datos.semana;
+          break;
+        case 'mes':
+          labels = meses;
+          data = datos.mes;
+          break;
+        case 'año':
+          labels = años;
+          data = datos.año;
+          break;
+      }
+
+      grafico = new Chart(ctx, {
+        type: tipo,
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Impacto ambiental',
+            data: data,
+            backgroundColor: [
+              '#379237', '#8BC34A', '#C5E1A5', '#E8F5E9',
+              '#66BB6A', '#A5D6A7', '#43A047'
+            ],
+            borderColor: '#2e7d32',
+            borderWidth: 1,
+            fill: tipo === 'line' || tipo === 'radar'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: tipo !== 'bar', position: 'bottom' }
+          },
+          scales: (tipo === 'bar' || tipo === 'line') ? {
+            y: { beginAtZero: true }
+          } : {}
+        }
+      });
+    }
+  </script>
+</body>
+</html>

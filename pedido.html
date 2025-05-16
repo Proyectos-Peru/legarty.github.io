@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Pedido</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Encabezado -->
+    <header class="header">
+      <h2>Pedir Cajas Saludables</h2>
+      <p class="subheader">Completa los detalles para enviar tu pedido</p>
+    </header>
+
+    <!-- Formulario de pedido -->
+    <main class="form-section">
+      <form onsubmit="event.preventDefault(); realizarPedido();">
+        <label for="cantidad">Cantidad de cajas:</label>
+        <input type="number" id="cantidad" placeholder="Ej. 10" required min="1" />
+
+        <label for="fecha">Fecha de entrega deseada:</label>
+        <input type="date" id="fecha" required />
+
+        <label for="comentarios">Comentarios adicionales:</label>
+        <textarea id="comentarios" placeholder="Instrucciones especiales..." rows="3"></textarea>
+
+        <button type="submit" class="btn-primary">Enviar Pedido</button>
+        <button type="button" class="btn-outline" onclick="window.location.href='dashboard.html'">Volver</button>
+      </form>
+    </main>
+
+    <!-- Confirmación visual -->
+    <section class="confirmation-section" id="confirmacionPedido" style="display:none;">
+      <h3>✅ Pedido registrado</h3>
+      <p>Tu pedido ha sido enviado correctamente. Pronto nos contactaremos contigo.</p>
+      <div></div>
+      <button type="button" class="btn-outline" onclick="window.location.href='dashboard.html'">Volver al inicio</button>
+    </section>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

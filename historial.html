@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Poshiniri Hub - Historial</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Encabezado -->
+    <header class="header">
+      <h2>Historial de Pedidos</h2>
+      <p class="subheader">Consulta tus pedidos anteriores</p>
+    </header>
+<button type="button" class="btn-outline" onclick="window.location.href='dashboard.html'">Volver al inicio</button>
+    <!-- Lista de pedidos -->
+    <main class="history-list">
+      <ul id="listaPedidos">
+
+        <!-- Ejemplo de ítem de historial -->
+        <li class="pedido-item">
+          <div class="pedido-info">
+            <h3>Pedido #00123</h3>
+            <p>🗓 05 mayo 2025</p>
+            <p>📦 12 cajas | Entregado</p>
+          </div>
+          <button class="btn-outline" onclick="verDetallePedido('00123')">Ver detalle</button>
+        </li>
+
+        <li class="pedido-item">
+          <div class="pedido-info">
+            <h3>Pedido #00118</h3>
+            <p>🗓 25 abril 2025</p>
+            <p>📦 8 cajas | Entregado</p>
+          </div>
+          <button class="btn-outline" onclick="verDetallePedido('00118')">Ver detalle</button>
+        </li>
+
+        <li class="pedido-item">
+          <div class="pedido-info">
+            <h3>Pedido #00110</h3>
+            <p>🗓 10 abril 2025</p>
+            <p>📦 10 cajas | Cancelado</p>
+          </div>
+          <button class="btn-outline" onclick="verDetallePedido('00110')">Ver detalle</button>
+        </li>
+
+      </ul>
+    </main>
+
+    <!-- Modal de detalle pedido (JS lo mostrará dinámicamente) -->
+    <div class="modal-overlay" id="pedidoModal" style="display:none;">
+      <div class="modal-content">
+        <h3>Detalle del Pedido</h3>
+        <p><strong>ID:</strong> <span id="modalId"></span></p>
+        <p><strong>Fecha:</strong> <span id="modalFecha"></span></p>
+        <p><strong>Cantidad:</strong> <span id="modalCantidad"></span></p>
+        <p><strong>Estado:</strong> <span id="modalEstado"></span></p>
+        <button class="btn-secondary" onclick="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

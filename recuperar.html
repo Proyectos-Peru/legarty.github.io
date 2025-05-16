@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Recuperar Contraseña - Poshiniri Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Encabezado -->
+    <header class="header">
+      <h2>Recuperar Contraseña</h2>
+      <p class="subheader">Te enviaremos instrucciones a tu correo</p>
+    </header>
+
+    <!-- Formulario -->
+    <main>
+      <form onsubmit="event.preventDefault(); mostrarModalRecuperacion();">
+        <label for="email">Correo electrónico registrado:</label>
+        <input type="email" id="email" required placeholder="ejemplo@empresa.com" />
+
+        <button type="submit" class="btn-primary">Enviar</button>
+        <button type="button" class="btn-outline" onclick="window.location.href='index.html'">Volver</button>
+
+      </form>
+    </main>
+
+    <!-- Modal visual -->
+    <div class="modal-overlay" id="modalRecuperacion" style="display: none;">
+      <div class="modal-content">
+        <h3>✅ Correo Enviado</h3>
+        <p>Te hemos enviado instrucciones para restablecer tu contraseña.</p>
+        <button class="btn-secondary" onclick="cerrarModal()">Volver al inicio</button>
+      </div>
+    </div>
+
+    <!-- Loader oculto -->
+    <div class="loader-overlay" id="loader" style="display:none;">
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
