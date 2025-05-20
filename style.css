@@ -113,6 +113,14 @@ button, .btn-primary, .btn-secondary, .btn-outline {
   color: #888;
 }
 
+.info-banner {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #ffeeba;
+}
 /* =============================
    GRID MENÚ PRINCIPAL
 ============================= */
