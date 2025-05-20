@@ -114,14 +114,7 @@ button, .btn-primary, .btn-secondary, .btn-outline {
   color: #888;
 }
 
-.info-banner {
-  background-color: #fff3cd;
-  color: #856404;
-  padding: 10px 15px;
-  text-align: center;
-  font-size: 0.95rem;
-  border-bottom: 1px solid #ffeeba;
-}
+
 /* =============================
    GRID MENÚ PRINCIPAL
 ============================= */
@@ -299,3 +292,30 @@ button, .btn-primary, .btn-secondary, .btn-outline {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+/* =============================
+   AÑADIDOS
+============================= */
+
+.info-banner {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #ffeeba;
+}
+
+.login-note {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  color: #2e7d32;
+  padding: 12px 15px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
